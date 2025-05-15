@@ -1,21 +1,17 @@
 {
   "version": 2,
   "framework": "nuxt",
+  "buildCommand": "NITRO_PRESET=vercel nuxt build",
+  "devCommand": "nuxt dev",
+  "outputDirectory": ".output",
   "builds": [
     {
       "src": ".output/server/index.mjs",
       "use": "@vercel/node"
     }
   ],
-  "buildCommand": "NITRO_PRESET=vercel npm run build",
-  "outputDirectory": ".output",
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": ".output/server/index.mjs"
-    }
-  ],
   "env": {
+    "NITRO_PRESET": "vercel",
     "GQL_HOST": "https://shop.therelic.blog/graphql",
     "APP_HOST": "https://shop-vercel.therelic.blog",
     "NUXT_PUBLIC_PRODUCTS_PER_PAGE": "24",
