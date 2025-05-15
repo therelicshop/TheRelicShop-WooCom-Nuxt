@@ -4,18 +4,18 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev --host",
-    "dev:ssl": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
+    "dev:ssl": "cross-env NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "serve": "nuxi generate && npx serve .output/public -l 8080",
     "vercel-build": "NITRO_PRESET=vercel nuxt build",
     "netlify-build": "NITRO_PRESET=netlify nuxt build"
   },
   "dependencies": {
     "@stripe/stripe-js": "^4.10.0",
     "@vueform/slider": "^2.1.10",
-    "@vueuse/core": "^13.1.0"
+    "@vueuse/core": "^13.1.0",
+    "cross-env": "^7.0.3"
   },
   "devDependencies": {
     "@iconify-json/ion": "^1.2.3",
@@ -28,11 +28,5 @@
     "nuxt-graphql-client": "^0.2.46",
     "prettier": "^3.5.3",
     "woonuxt-settings": "^1.2.1"
-  },
-  "overrides": {
-    "sharp": "0.32.6"
-  },
-  "optionalDependencies": {
-    "@rollup/rollup-linux-x64-gnu": "4.40.2"
   }
 }
