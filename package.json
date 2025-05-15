@@ -8,7 +8,9 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "serve": "nuxi generate && npx serve .output/public -l 8080"
+    "serve": "nuxi generate && npx serve .output/public -l 8080",
+    "vercel-build": "NITRO_PRESET=vercel nuxt build",
+    "netlify-build": "NITRO_PRESET=netlify nuxt build"
   },
   "dependencies": {
     "@stripe/stripe-js": "^4.10.0",
