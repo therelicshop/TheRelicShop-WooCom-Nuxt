@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": ".output/server/index.mjs",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": ".output/server/index.mjs"
+    }
+  ],
+  "env": {
+    "GQL_HOST": "https://shop.therelic.blog/graphql",
+    "APP_HOST": "https://shop-vercel.therelic.blog",
+    "NUXT_PUBLIC_PRODUCTS_PER_PAGE": "24",
+    "NUXT_IMAGE_DOMAINS": "shop.therelic.blog",
+    "NODE_ENV": "production",
+    "SITE_NAME": "The Relic Shop",
+    "NUXT_IMAGE_PROVIDER": "vercel"
+  }
+}
