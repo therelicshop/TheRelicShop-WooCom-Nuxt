@@ -8,8 +8,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "vercel-build": "NITRO_PRESET=vercel nuxt build",
-    "netlify-build": "NITRO_PRESET=netlify nuxt build"
+    "vercel-build": "cross-env NITRO_PRESET=vercel NODE_ENV=production nuxt build",
+    "netlify-build": "cross-env NITRO_PRESET=netlify NODE_ENV=production nuxt build"
   },
   "dependencies": {
     "@stripe/stripe-js": "^4.10.0",
