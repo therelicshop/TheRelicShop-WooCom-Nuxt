@@ -1,6 +1,10 @@
 mutation Logout {
   forgetSession(input: { clientMutationId: "" }) {
     clientMutationId
-    session
+    session {
+      id
+      key
+      value
+    }
   }
 }
