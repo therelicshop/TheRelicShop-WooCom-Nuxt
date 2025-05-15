@@ -1,11 +1,14 @@
 {
   "version": 2,
+  "framework": "nuxt",
   "builds": [
     {
       "src": ".output/server/index.mjs",
       "use": "@vercel/node"
     }
   ],
+  "buildCommand": "NITRO_PRESET=vercel npm run build",
+  "outputDirectory": ".output",
   "routes": [
     {
       "src": "/(.*)",
