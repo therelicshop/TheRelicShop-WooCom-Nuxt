@@ -94,7 +94,10 @@ export default defineNuxtConfig({
       interval: 1000,
       failOnError: false,
     },
-    minify: true
+    minify: true,
+    externals: {
+      inline: ['graphql-request']
+    }
   },
   
   // Add support for route rules to handle WordPress media files
