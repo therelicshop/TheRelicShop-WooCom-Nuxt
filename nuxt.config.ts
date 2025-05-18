@@ -96,7 +96,7 @@ export default defineNuxtConfig({
     },
     minify: true,
     externals: {
-      inline: ['graphql-request']
+      inline: ['graphql-request', 'graphql']
     }
   },
   
