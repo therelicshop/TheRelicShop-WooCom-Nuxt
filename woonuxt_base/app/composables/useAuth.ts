@@ -20,13 +20,18 @@ export const useAuth = () => {
   const loginClients = useState<LoginClient[] | null>('loginClients', () => null);
 
   // Log in the user
-  const loginUser = async (credentials: CreateAccountInput): Promise<{ success: boolean; error: any }> => {
+  const loginUser = async (credentials: CreateAccountInput & { rememberMe?: boolean }): Promise<{ success: boolean; error: any }> => {
     isPending.value = true;
 
     try {
       const { login } = await GqlLogin(credentials);
       if (login?.user && login?.authToken) {
-        useGqlToken(login.authToken);
+        // Use the rememberMe flag to set appropriate cookie expiration
+        const cookieOptions = credentials.rememberMe 
+          ? { maxAge: 30 * 24 * 60 * 60 } // 30 days if rememberMe is true
+          : undefined; // Default session cookie if rememberMe is false
+        
+        useGqlToken(login.authToken, cookieOptions);
         await refreshCart();
       }
 
@@ -104,11 +109,21 @@ export const useAuth = () => {
     }
   };
 
-  const registerUser = async (userInfo: RegisterCustomerInput): Promise<{ success: boolean; error: any }> => {
+  const registerUser = async (userInfo: RegisterCustomerInput & { rememberMe?: boolean }): Promise<{ success: boolean; error: any }> => {
     isPending.value = true;
     try {
-      await GqlRegisterCustomer({ input: userInfo });
-      return { success: true, error: null };
+      const { rememberMe, ...registerInput } = userInfo;
+      await GqlRegisterCustomer({ input: registerInput });
+      
+      // After successful registration, log in the user
+      // Extract credentials needed for login
+      const loginCredentials = {
+        username: userInfo.username,
+        password: userInfo.password,
+        rememberMe: userInfo.rememberMe
+      };
+      
+      return await loginUser(loginCredentials);
     } catch (error: any) {
       logGQLError(error);
       const gqlError = error?.gqlErrors?.[0];
